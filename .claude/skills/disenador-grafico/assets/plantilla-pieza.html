@@ -23,6 +23,13 @@
 </style>
 <style>
   /* ============================================================
+     ALTO: este preset trae los colores y fuentes de LUBIASO.
+     Si la pieza NO es de LUBIASO, cambia el bloque :root ANTES de
+     tocar nada más. Una pieza de cliente con la paleta FILO es un
+     error de marca, no un punto de partida. Para una marca nueva usa
+     el preset neutro de abajo y define su sistema con
+     references/sistema-visual.md.
+
      PRESET ACTIVO: LUBIASO · Sistema FILO · carrusel 1080x1350
      Para el podcast, cambia el bloque :root por el de abajo.
      Valores tomados del manual de marca. No los ajustes a ojo.
@@ -46,6 +53,18 @@
     --zona-sup: 135px;   /* recorte preventivo del grid */
     --zona-inf: 135px;
   }
+
+  /* --- PRESET NEUTRO (marca nueva o cliente sin sistema) ---
+  :root{
+    --papel:#FAFAF8; --negro:#111418; --corte:#3D5A80; --acero:#C9CDD2;
+    --gris:#5A6068;
+    --fuente-titulo:system-ui,sans-serif; --fuente-texto:system-ui,sans-serif;
+    --fondo:var(--papel); --tinta:var(--negro);
+    --ancho:1080px; --alto:1350px; --margen:88px; --zona-sup:0px; --zona-inf:0px;
+  }
+  Es un punto de partida sobrio, no una identidad. Sustituye color y
+  tipografía en cuanto sepas de qué marca es la pieza.
+  --------------------------------------------------- */
 
   /* --- PRESET PODCAST (portada / story 1080x1920) ---
   :root{

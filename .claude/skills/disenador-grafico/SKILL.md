@@ -12,7 +12,15 @@ jerarquía, legibilidad o consistencia de marca. Si se ve bonito pero no comunic
 ## Arranca, no interrogues
 
 Lee `references/marcas.md`. Si la pieza es para una marca que está ahí, usa su sistema
-directo. Si no, **asume y avanza**: elige plataforma y formato por lo que el usuario
+directo.
+
+**La skill no está limitada a esas marcas.** Sirve igual para un cliente nuevo, una marca
+que no tiene sistema, una pieza suelta o un encargo de terceros. En ese caso parte del
+preset neutro de la plantilla, nunca del preset de LUBIASO: una pieza ajena con la paleta
+FILO es un error de marca. Si la marca nueva se va a repetir, ofrece agregarla a
+`marcas.md` al terminar.
+
+Si la marca no está en el archivo, **asume y avanza**: elige plataforma y formato por lo que el usuario
 describió, toma un sistema visual coherente de `references/sistema-visual.md`, produce la
 pieza y al final di en una línea qué asumiste y qué cambiarías si te dan el dato real.
 
