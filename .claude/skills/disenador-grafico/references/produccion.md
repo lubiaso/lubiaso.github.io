@@ -5,28 +5,34 @@ No entregues solo instrucciones. Produce la pieza. Elige la vía en este orden:
 ## 1. HTML + render a imagen (vía por defecto)
 
 Sirve para casi todo: posts, carruseles, stories, portadas, banners, miniaturas.
-Copia `assets/plantilla-pieza.html`, ajusta variables y contenido, y renderiza.
+Copia `assets/plantilla-pieza.html`, ajusta variables y contenido, y renderiza con el
+script incluido:
 
 ```bash
-# Renderizar a PNG (requiere Playwright: pip install playwright && playwright install chromium)
-python3 - <<'PY'
-from playwright.sync_api import sync_playwright
-import pathlib
-ruta = pathlib.Path("pieza.html").resolve().as_uri()
-with sync_playwright() as p:
-    b = p.chromium.launch()   # si falla: launch(executable_path="/opt/pw-browsers/chromium-1194/chrome-linux/chrome", args=["--no-sandbox"])
-    pg = b.new_page(viewport={"width": 1080, "height": 1350}, device_scale_factor=1)
-    pg.goto(ruta); pg.wait_for_timeout(2500)   # espera a que carguen las fuentes
-    pg.locator(".pieza").screenshot(path="pieza.png")   # recorta exacto al lienzo
-    b.close()
-PY
+python3 assets/render.py pieza.html pieza.png 1080 1350 --fuentes "Syne,Public Sans"
 ```
 
-Para un carrusel: un archivo HTML por slide, mismo `:root`, y renderiza en bucle a
+El script hace tres cosas: renderiza, recorta exacto al elemento `.pieza`, y **verifica
+que las fuentes de marca cargaron de verdad**. Si alguna no cargó, sale con error y la
+pieza no se entrega.
+
+### Por qué la verificación no es opcional
+
+`document.fonts.check()` devuelve `true` aunque la fuente no exista, porque responde sobre
+el fallback. Una pieza puede renderizar perfecta y estar en la tipografía equivocada sin
+que se note a simple vista. El script mide el mismo texto con dos fallbacks de métricas
+distintas: si la fuente cargó, ambos anchos coinciden; si no, difieren.
+
+Causas frecuentes de que no cargue: sin red hacia Google Fonts, proxy que bloquea el CDN,
+o el `.ttf` no está en `assets/fonts/`. Arreglo: copiar los `.ttf` del kit de marca a
+`assets/fonts/` o instalarlos en el sistema. Nunca sustituyas la fuente de marca por otra
+parecida sin decirlo.
+
+Para un carrusel: un archivo HTML por slide, mismo bloque `:root`, y renderiza en bucle a
 `slide-01.png`, `slide-02.png`…
 
-Si Playwright no está disponible, no te detengas: entrega el HTML, di que se abre en el
-navegador y se captura a 1080px de ancho, y sigue con el resto del entregable.
+Si no hay Playwright ni forma de renderizar, no te detengas: entrega el HTML, di
+explícitamente que no pudiste verificar las fuentes, y sigue con el resto del entregable.
 
 ## 2. SVG
 
@@ -36,10 +42,14 @@ Convierte el texto a trazos solo en el archivo final de entrega, nunca en el edi
 
 ## 3. Canva
 
-Cuando la pieza deba quedar editable por una persona, o forme parte de plantillas ya
-existentes. Usa el conector de Canva para crear o editar el diseño **después** de haber
-fijado la especificación. Antes de crear algo nuevo, busca si ya existe una plantilla de
-marca que se deba reutilizar.
+Cuando la pieza deba quedar editable por una persona, cuando forme parte de plantillas ya
+existentes, o **cuando las fuentes de marca no carguen fuera de Canva**: dentro de Canva sí
+están, vía el Kit de Marca.
+
+Kits de marca disponibles: LUBIASO (`kAHUpyry43w`) y PODCAST (`kAHUp7rPFQo`).
+
+Antes de crear algo nuevo, busca si ya existe la plantilla: las de LUBIASO viven en la
+carpeta `FAHUphLtvJM` y se duplican, no se rediseñan.
 
 ## 4. Imágenes generadas
 

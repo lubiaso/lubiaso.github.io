@@ -3,30 +3,62 @@
 <head>
 <meta charset="utf-8">
 <title>Pieza</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
-  /* ---------- SISTEMA: cambia solo esto ---------- */
+  /* FUENTES DE MARCA. Orden: la instalada en el sistema, luego el .ttf del kit
+     en assets/fonts/. No se depende de Google Fonts: si no hay red, la pieza
+     saldría con otra tipografía y eso rompe la marca sin que se note.
+     Los .ttf del kit son Syne-ExtraBold.ttf, PublicSans-Regular.ttf y
+     PublicSans-Bold.ttf (carpeta 04_tipografias del KIT_MARCA_LUBIASO).
+     Verifica SIEMPRE con: python3 render.py pieza.html out.png 1080 1350 \
+                              --fuentes "Syne,Public Sans"                   */
+  @font-face{font-family:'Syne';font-weight:800;font-display:block;
+    src:local('Syne ExtraBold'),local('Syne-ExtraBold'),
+        url('fonts/Syne-ExtraBold.ttf') format('truetype');}
+  @font-face{font-family:'Public Sans';font-weight:400;font-display:block;
+    src:local('Public Sans'),local('PublicSans-Regular'),
+        url('fonts/PublicSans-Regular.ttf') format('truetype');}
+  @font-face{font-family:'Public Sans';font-weight:700;font-display:block;
+    src:local('Public Sans Bold'),local('PublicSans-Bold'),
+        url('fonts/PublicSans-Bold.ttf') format('truetype');}
+</style>
+<style>
+  /* ============================================================
+     PRESET ACTIVO: LUBIASO · Sistema FILO · carrusel 1080x1350
+     Para el podcast, cambia el bloque :root por el de abajo.
+     Valores tomados del manual de marca. No los ajustes a ojo.
+     ============================================================ */
   :root{
-    --primario:  #1F3A5F;
-    --acento:    #E4572E;
-    --fondo:     #FAFAF8;
-    --tinta:     #111418;
-    --tinta-sua: #5A6068;
+    --papel:  #FBFAF8;
+    --negro:  #111111;
+    --corte:  #C3352B;   /* solo líneas. NUNCA texto pequeño */
+    --acero:  #B9BDC0;
+    --gris:   #5F5D58;
 
-    --fuente-titulo: 'Archivo Black', 'Archivo', system-ui, sans-serif;
-    --fuente-texto:  'Archivo', system-ui, sans-serif;
+    --fuente-titulo: 'Syne', system-ui, sans-serif;      /* ExtraBold 800 */
+    --fuente-texto:  'Public Sans', system-ui, sans-serif;
+
+    --fondo: var(--papel);
+    --tinta: var(--negro);
 
     --ancho: 1080px;
-    --alto:  1350px;   /* 1350 = 4:5 · 1080 = 1:1 · 1920 = 9:16 */
-    --margen: 88px;    /* ~6-8% del lado corto */
-    --u: 8px;          /* unidad base de espaciado */
-
-    --safe-sup: 0px;   /* 250px si es story/reel */
-    --safe-inf: 0px;   /* 420px si es story/reel */
+    --alto:  1350px;
+    --margen: 70px;      /* carrusel LUBIASO: 70 por lado */
+    --zona-sup: 135px;   /* recorte preventivo del grid */
+    --zona-inf: 135px;
   }
-  /* ----------------------------------------------- */
+
+  /* --- PRESET PODCAST (portada / story 1080x1920) ---
+  :root{
+    --tinta-p:#12090D; --crema:#FBEEF2; --rojo:#E63455; --rosa:#FF7AA2;
+    --fondo:var(--tinta-p); --tinta:var(--crema);
+    --ancho:1080px; --alto:1920px; --margen:60px;
+    --zona-sup:250px; --zona-inf:250px;
+  }
+  Titular 104/0.96/-0.035 sobre foto · 78/0.98 sobre banda crema
+  Etiqueta 24 semibold +0.16 en rojo · Pie 30 semibold +0.14
+  Banda crema de 380px con filete rojo vertical de 26px al borde izquierdo.
+  El rosa resalta UNA palabra, nunca la frase.
+  --------------------------------------------------- */
 
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#2a2a2a;display:flex;justify-content:center;padding:40px}
@@ -36,71 +68,71 @@
     background:var(--fondo);color:var(--tinta);
     font-family:var(--fuente-texto);overflow:hidden;
     display:flex;flex-direction:column;
-    padding:calc(var(--margen) + var(--safe-sup)) var(--margen)
-            calc(var(--margen) + var(--safe-inf));
+    padding:calc(var(--margen) + var(--zona-sup)) var(--margen)
+            calc(var(--margen) + var(--zona-inf));
   }
 
-  /* Foto de fondo opcional: quita este bloque si la pieza es de color plano */
+  /* Foto: va debajo y llega al borde. La banda se le monta encima. */
   .foto{position:absolute;inset:0;z-index:0}
   .foto img{width:100%;height:100%;object-fit:cover}
-  .foto::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(17,20,24,.88) 18%,rgba(17,20,24,.45) 55%,rgba(17,20,24,.1) 100%)}
-  .pieza--foto{color:#fff;--tinta:#fff;--tinta-sua:rgba(255,255,255,.72)}
+  .pieza--foto{--tinta:#FBFAF8}
+  .pieza--foto .foto::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(17,17,17,.9) 20%,rgba(17,17,17,.35) 60%,rgba(17,17,17,0) 100%)}
 
-  .capa{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+  /* El bloque de portada va CENTRADO. Anclado arriba deja hueco muerto. */
+  .capa{position:relative;z-index:1;display:flex;flex-direction:column;
+        height:100%;justify-content:center}
+  .capa--arriba{justify-content:flex-start}
+  .capa--abajo{justify-content:flex-end}
 
-  /* Nivel 3: etiqueta */
-  .kicker{
-    font-size:30px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--acento);margin-bottom:calc(var(--u)*4);
-  }
+  /* Numerador: rojo, arriba a la izquierda. Public Sans Bold 22. */
+  .numerador{position:absolute;top:calc(var(--margen) + var(--zona-sup));
+    left:var(--margen);z-index:2;font-size:22px;font-weight:700;
+    letter-spacing:.1em;color:var(--corte)}
 
-  /* Nivel 1: el foco. Un solo elemento manda. */
-  .titular{
-    font-family:var(--fuente-titulo);font-size:136px;line-height:1.02;
-    letter-spacing:-.02em;text-wrap:balance;max-width:14ch;
-  }
-  .titular em{font-style:normal;color:var(--acento)}
+  .titular{font-family:var(--fuente-titulo);font-weight:800;
+    font-size:54px;line-height:1.16;letter-spacing:-.02em;
+    text-wrap:balance;max-width:17ch}
 
-  /* Nivel 2: apoyo */
-  .bajada{
-    margin-top:calc(var(--u)*5);font-size:40px;line-height:1.35;
-    color:var(--tinta-sua);max-width:26ch;font-weight:400;
-  }
+  .bajada{margin-top:28px;font-size:32px;line-height:1.45;
+    color:var(--gris);max-width:30ch;font-weight:400}
 
-  .relleno{flex:1}
+  /* Cuerpo de página interna */
+  .interna .titular{font-size:40px;line-height:1.18}
+  .cuerpo{font-size:32px;line-height:1.5;margin-top:28px;max-width:30ch}
+  .cuerpo strong{font-weight:700}
 
-  /* Layout alternativo: ancla el contenido abajo. Suele leerse mejor en feed.
-     Uso: <div class="pieza pieza--abajo"> y mueve .relleno antes del .kicker. */
-  .pieza--abajo .capa{justify-content:flex-end}
-  .pieza--abajo .relleno{flex:0}
+  /* Cierre: única página negra. El contraste avisa que terminó. */
+  .pieza--cierre{--fondo:var(--negro);--tinta:var(--papel);--gris:#B9BDC0}
+  .pieza--cierre .titular{font-size:46px;line-height:1.18}
+  .cta{font-size:34px;line-height:1.4;font-weight:700;margin-top:36px}
 
-  .pie{display:flex;align-items:center;justify-content:space-between;gap:24px}
-  .marca{font-size:30px;font-weight:600;letter-spacing:.04em}
-  .paginacion{font-size:28px;font-weight:500;color:var(--tinta-sua)}
+  /* REGLA 1: un solo elemento rojo por pieza. El numerador ya lo es, así que
+     el filete va en negro. Si quitas el numerador, puedes pintarlo de --corte. */
+  .filete{width:120px;height:6px;background:var(--negro);margin-bottom:32px}
 
-  /* Guías: pon class="pieza guias" para verlas. QUÍTALAS antes de exportar. */
+  .pie{position:absolute;bottom:calc(var(--margen) + var(--zona-inf));
+    right:var(--margen);z-index:2;
+    font-family:var(--fuente-titulo);font-weight:700;font-size:26px}
+
+  /* Guías de zona segura. Pon class="pieza guias". QUÍTALAS antes de exportar. */
   .guias::before{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
-    border:1px dashed rgba(228,87,46,.9);
-    margin:calc(var(--margen) + var(--safe-sup)) var(--margen) calc(var(--margen) + var(--safe-inf));}
+    border:1px dashed rgba(195,53,43,.85);
+    margin:calc(var(--margen) + var(--zona-sup)) var(--margen)
+           calc(var(--margen) + var(--zona-inf));}
 </style>
 </head>
 <body>
 
-<!-- Quita "pieza--abajo" si prefieres el contenido anclado arriba -->
-<div class="pieza pieza--abajo">
+<div class="pieza">
   <!-- <div class="foto"><img src="foto.jpg" alt=""></div> -->
+  <span class="numerador">01 / 07</span>
   <div class="capa">
-    <div class="relleno"></div>
-    <div class="kicker">Etiqueta</div>
-    <h1 class="titular">El titular manda <em>y va solo</em></h1>
-    <p class="bajada">Una línea de apoyo, corta. Si necesitas más, va en el copy del post.</p>
-    <div style="height:72px"></div>
-    <div class="pie">
-      <span class="marca">@lubiaso</span>
-      <span class="paginacion">01 / 07</span>
-    </div>
+    <div class="filete"></div>
+    <h1 class="titular">Nadie te avisa que a los 40 empieza lo bueno</h1>
+    <p class="bajada">Y tampoco te avisan lo otro. De eso vamos a hablar hoy.</p>
   </div>
+  <span class="pie">LUBIASO</span>
 </div>
 
 </body>

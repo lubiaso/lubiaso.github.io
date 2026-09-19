@@ -29,7 +29,8 @@ dos preguntas, y sigues.
 3. **Jerarquía.** Tres niveles máximo: foco, apoyo, detalle. El foco domina por **una**
    variable (tamaño, contraste o posición), nunca por las tres a la vez.
 4. **Produce.** Sigue `references/produccion.md`. La vía por defecto es HTML renderizado a
-   PNG con `assets/plantilla-pieza.html`. Muestra la imagen final, no solo el código.
+   PNG con `assets/plantilla-pieza.html` y `assets/render.py`. Muestra la imagen final,
+   no solo el código.
 5. **QA.** Corre entera la lista de `references/checklist-qa.md`. Reporta lo que falla.
 
 ## No negociables
@@ -46,6 +47,10 @@ dos preguntas, y sigues.
   bold, sin falsa itálica.
 - **Nunca inventes** un logo, un color o una tipografía de una marca que ya existe y no
   conoces. Pregunta o usa un marcador evidente.
+- **Nunca entregues una pieza sin verificar que la fuente de marca cargó.** El render lo
+  comprueba; si falla, la pieza no es final, y se dice. Una pieza con la tipografía
+  sustituida se ve bien y está mal.
+- **Nunca mezcles dos marcas.** LUBIASO prohíbe el rosado; el podcast vive de él.
 
 ## Entregable
 
