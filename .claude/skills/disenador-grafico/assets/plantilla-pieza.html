@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pieza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  /* ---------- SISTEMA: cambia solo esto ---------- */
+  :root{
+    --primario:  #1F3A5F;
+    --acento:    #E4572E;
+    --fondo:     #FAFAF8;
+    --tinta:     #111418;
+    --tinta-sua: #5A6068;
+
+    --fuente-titulo: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+    --fuente-texto:  'Archivo', system-ui, sans-serif;
+
+    --ancho: 1080px;
+    --alto:  1350px;   /* 1350 = 4:5 · 1080 = 1:1 · 1920 = 9:16 */
+    --margen: 88px;    /* ~6-8% del lado corto */
+    --u: 8px;          /* unidad base de espaciado */
+
+    --safe-sup: 0px;   /* 250px si es story/reel */
+    --safe-inf: 0px;   /* 420px si es story/reel */
+  }
+  /* ----------------------------------------------- */
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#2a2a2a;display:flex;justify-content:center;padding:40px}
+
+  .pieza{
+    position:relative;width:var(--ancho);height:var(--alto);
+    background:var(--fondo);color:var(--tinta);
+    font-family:var(--fuente-texto);overflow:hidden;
+    display:flex;flex-direction:column;
+    padding:calc(var(--margen) + var(--safe-sup)) var(--margen)
+            calc(var(--margen) + var(--safe-inf));
+  }
+
+  /* Foto de fondo opcional: quita este bloque si la pieza es de color plano */
+  .foto{position:absolute;inset:0;z-index:0}
+  .foto img{width:100%;height:100%;object-fit:cover}
+  .foto::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(17,20,24,.88) 18%,rgba(17,20,24,.45) 55%,rgba(17,20,24,.1) 100%)}
+  .pieza--foto{color:#fff;--tinta:#fff;--tinta-sua:rgba(255,255,255,.72)}
+
+  .capa{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+
+  /* Nivel 3: etiqueta */
+  .kicker{
+    font-size:30px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--acento);margin-bottom:calc(var(--u)*4);
+  }
+
+  /* Nivel 1: el foco. Un solo elemento manda. */
+  .titular{
+    font-family:var(--fuente-titulo);font-size:136px;line-height:1.02;
+    letter-spacing:-.02em;text-wrap:balance;max-width:14ch;
+  }
+  .titular em{font-style:normal;color:var(--acento)}
+
+  /* Nivel 2: apoyo */
+  .bajada{
+    margin-top:calc(var(--u)*5);font-size:40px;line-height:1.35;
+    color:var(--tinta-sua);max-width:26ch;font-weight:400;
+  }
+
+  .relleno{flex:1}
+
+  /* Layout alternativo: ancla el contenido abajo. Suele leerse mejor en feed.
+     Uso: <div class="pieza pieza--abajo"> y mueve .relleno antes del .kicker. */
+  .pieza--abajo .capa{justify-content:flex-end}
+  .pieza--abajo .relleno{flex:0}
+
+  .pie{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .marca{font-size:30px;font-weight:600;letter-spacing:.04em}
+  .paginacion{font-size:28px;font-weight:500;color:var(--tinta-sua)}
+
+  /* Guías: pon class="pieza guias" para verlas. QUÍTALAS antes de exportar. */
+  .guias::before{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
+    border:1px dashed rgba(228,87,46,.9);
+    margin:calc(var(--margen) + var(--safe-sup)) var(--margen) calc(var(--margen) + var(--safe-inf));}
+</style>
+</head>
+<body>
+
+<!-- Quita "pieza--abajo" si prefieres el contenido anclado arriba -->
+<div class="pieza pieza--abajo">
+  <!-- <div class="foto"><img src="foto.jpg" alt=""></div> -->
+  <div class="capa">
+    <div class="relleno"></div>
+    <div class="kicker">Etiqueta</div>
+    <h1 class="titular">El titular manda <em>y va solo</em></h1>
+    <p class="bajada">Una línea de apoyo, corta. Si necesitas más, va en el copy del post.</p>
+    <div style="height:72px"></div>
+    <div class="pie">
+      <span class="marca">@lubiaso</span>
+      <span class="paginacion">01 / 07</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
