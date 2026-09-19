@@ -218,11 +218,12 @@ Aquí el rosa **sí** va: es el lenguaje del podcast.
 
 ## Tipografía
 
-Una sola familia en dos pesos: **ultrabold** para titulares y etiquetas, **semibold** para
-pies y datos. El nombre exacto vive en el Kit de Marca PODCAST de Canva y no se puede leer
-por API: si vas a producir dentro de Canva, toma la fuente del panel Marca. Si produces
-fuera de Canva, usa un sustituto de peso equivalente y avísale al usuario que es un
-sustituto, no la fuente de marca.
+**Figtree**, una sola familia en dos pesos: **800 (ultrabold)** para titulares y etiquetas,
+**600 (semibold)** para pies y datos.
+
+Es de Google Fonts. Para producir fuera de Canva, el archivo variable está en
+fonts.google.com/specimen/Figtree; guárdalo como `assets/fonts/Figtree.ttf` y verifica
+con `--fuentes "Figtree"` antes de entregar.
 
 ## Escala verificada (portadas y stories, 1080 × 1920, margen izquierdo 60)
 
