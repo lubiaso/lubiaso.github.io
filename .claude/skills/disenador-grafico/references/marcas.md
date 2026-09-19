@@ -150,11 +150,6 @@ sustituto, no la fuente de marca.
 Portada de episodio 3000 × 3000 · post 1080 × 1350 · story y clip 1080 × 1920 ·
 miniatura YouTube 1280 × 720.
 
-## Tono para textos dentro de la pieza
-
-Primera persona en plural ("a nosotras nos pasa", "nadie nos avisó"). Cero tono de coach,
-cero autoayuda. El valor es identificarse, no resolver.
-
 ---
 
 # Sansa Cosmetics
@@ -170,12 +165,6 @@ no compite con él, y ningún overlay ni filtro puede alterar el tono del produc
 — eso es engañoso y además genera devoluciones.
 
 ---
-
-# Palabras prohibidas (aplican a todo texto dentro de una pieza)
-
-sanar · soltar · abrazar tu proceso · elegirte a ti misma · amor propio · vibrar alto ·
-resiliencia · empoderarte · esta es tu señal · listas de tips · preguntas de coach ·
-diminutivos.
 
 # Cómo agregar una marca
 

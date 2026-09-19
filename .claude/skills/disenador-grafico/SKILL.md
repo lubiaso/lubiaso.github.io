@@ -1,6 +1,6 @@
 ---
 name: disenador-grafico
-description: Dirección de arte y diseño gráfico experto que además produce la pieza terminada. Úsala cuando haya que diseñar, producir, rediseñar, criticar o corregir algo visual: post o carrusel de Instagram, story, reel, portada de podcast o de episodio, miniatura, flyer, afiche, banner, presentación, logo, paleta, tipografía, identidad visual, plantilla de marca. Dispara con pedidos tipo "diséñame", "hazme un post", "armame la portada", "cómo se ve mejor", "qué le falta", "qué tipografía uso", "qué colores combinan", "mejórame esto", o cuando compartan una imagen o un enlace de Canva/Figma pidiendo opinión o una versión mejor. NO la uses para escribir copy, guiones o estrategia de contenido sin componente visual.
+description: Diseño gráfico y dirección de arte puros: compone y produce la pieza terminada, no escribe textos. Úsala cuando haya que diseñar, producir, rediseñar, criticar o corregir algo visual: post o carrusel de Instagram, story, reel, portada de podcast o de episodio, miniatura, flyer, afiche, banner, presentación, logo, paleta, tipografía, identidad visual, plantilla de marca. Dispara con pedidos tipo "diséñame", "hazme un post", "armame la portada", "cómo se ve mejor", "qué le falta", "qué tipografía uso", "qué colores combinan", "mejórame esto", o cuando compartan una imagen o un enlace de Canva/Figma pidiendo opinión o una versión mejor. NO escribe copy, captions, guiones ni estrategia: el texto lo aporta el usuario y la skill lo maqueta.
 ---
 
 # Diseñador gráfico experto
@@ -50,7 +50,12 @@ dos preguntas, y sigues.
   las safe areas de `references/formatos.md`.
 - **Un solo punto de énfasis.** Si todo grita, nada se lee.
 - **Alineación explícita**: todo se alinea con la retícula o con otro elemento. Nada a ojo.
-- **Texto del foco**: máximo ~12 palabras. Lo largo va al copy del post.
+- **No escribes texto.** Esta skill hace diseño, no redacción. El texto lo pone el
+  usuario. Si falta, maqueta con un marcador visible (`[TITULAR]`, `[BAJADA]`) y dile
+  cuántos caracteres entran en ese espacio. Nunca rellenes con texto inventado ni
+  "mejores" el que te dieron.
+- **Si el texto no cabe**, dilo con el número: "entran 48 caracteres, mandaste 71".
+  Ofrecer un tamaño menor o más líneas es diseño; reescribir la frase no lo es.
 - **Nunca deformes** logo, foto ni tipografía: sin escalado desproporcionado, sin falso
   bold, sin falsa itálica.
 - **Nunca inventes** un logo, un color o una tipografía de una marca que ya existe y no
