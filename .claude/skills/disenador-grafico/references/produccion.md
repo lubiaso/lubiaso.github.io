@@ -9,7 +9,7 @@ Copia `assets/plantilla-pieza.html`, ajusta variables y contenido, y renderiza c
 script incluido:
 
 ```bash
-python3 assets/render.py pieza.html pieza.png 1080 1350 --fuentes "Syne,Public Sans"
+python3 assets/render.py pieza.html pieza.png 1080 1350 --fuentes "Newsreader,Public Sans"
 ```
 
 El script hace tres cosas: renderiza, recorta exacto al elemento `.pieza`, y **verifica

@@ -4,16 +4,15 @@
 <meta charset="utf-8">
 <title>Pieza</title>
 <style>
-  /* FUENTES DE MARCA. Orden: la instalada en el sistema, luego el .ttf del kit
-     en assets/fonts/. No se depende de Google Fonts: si no hay red, la pieza
-     saldría con otra tipografía y eso rompe la marca sin que se note.
-     Los .ttf del kit son Syne-ExtraBold.ttf, PublicSans-Regular.ttf y
-     PublicSans-Bold.ttf (carpeta 04_tipografias del KIT_MARCA_LUBIASO).
-     Verifica SIEMPRE con: python3 render.py pieza.html out.png 1080 1350 \
-                              --fuentes "Syne,Public Sans"                   */
-  @font-face{font-family:'Syne';font-weight:800;font-display:block;
-    src:local('Syne ExtraBold'),local('Syne-ExtraBold'),
-        url('fonts/Syne-ExtraBold.ttf') format('truetype');}
+  /* FUENTES DE MARCA. Orden: la instalada en el sistema, luego el .ttf en
+     assets/fonts/. No se depende de Google Fonts en tiempo de render: sin red
+     la pieza saldría con otra tipografía y eso rompe la marca sin que se note.
+     Newsreader se descarga de fonts.google.com/specimen/Newsreader (no viene
+     en el kit). Verifica SIEMPRE con:
+       python3 render.py pieza.html out.png 1080 1350 --fuentes "Newsreader,Public Sans" */
+  @font-face{font-family:'Newsreader';font-weight:600;font-display:block;
+    src:local('Newsreader SemiBold'),local('Newsreader-SemiBold'),
+        url('fonts/Newsreader-SemiBold.ttf') format('truetype');}
   @font-face{font-family:'Public Sans';font-weight:400;font-display:block;
     src:local('Public Sans'),local('PublicSans-Regular'),
         url('fonts/PublicSans-Regular.ttf') format('truetype');}
@@ -23,25 +22,23 @@
 </style>
 <style>
   /* ============================================================
-     ALTO: este preset trae los colores y fuentes de LUBIASO.
+     ALTO: este preset trae el sistema de LUBIASO (Filo v3).
      Si la pieza NO es de LUBIASO, cambia el bloque :root ANTES de
-     tocar nada más. Una pieza de cliente con la paleta FILO es un
-     error de marca, no un punto de partida. Para una marca nueva usa
-     el preset neutro de abajo y define su sistema con
-     references/sistema-visual.md.
+     tocar nada más. Una pieza de cliente con la paleta Filo es un
+     error de marca, no un punto de partida.
 
-     PRESET ACTIVO: LUBIASO · Sistema FILO · carrusel 1080x1350
-     Para el podcast, cambia el bloque :root por el de abajo.
-     Valores tomados del manual de marca. No los ajustes a ojo.
+     PRESET ACTIVO: LUBIASO · Filo v3 · carrusel 1080x1350
+     Tamaños convertidos desde los puntos del manual: 1pt = 1,333px.
+     No los cambies a ojo: el manual manda.
      ============================================================ */
   :root{
     --papel:  #FBFAF8;
     --negro:  #111111;
     --corte:  #C3352B;   /* solo líneas. NUNCA texto pequeño */
-    --acero:  #B9BDC0;
-    --gris:   #5F5D58;
+    --acero:  #B9BDC0;   /* bloques y el numerador. Nunca como texto de lectura */
+    --grafito:#5F5D58;   /* bajadas y metadatos, solo sobre papel */
 
-    --fuente-titulo: 'Syne', system-ui, sans-serif;      /* ExtraBold 800 */
+    --fuente-titulo: 'Newsreader', Georgia, serif;   /* SemiBold 600 */
     --fuente-texto:  'Public Sans', system-ui, sans-serif;
 
     --fondo: var(--papel);
@@ -49,21 +46,21 @@
 
     --ancho: 1080px;
     --alto:  1350px;
-    --margen: 70px;      /* carrusel LUBIASO: 70 por lado */
-    --zona-sup: 135px;   /* recorte preventivo del grid */
+    --margen: 60px;      /* 1,6 cm por lado */
+    --zona-sup: 135px;   /* 3,6 cm, recorte preventivo del grid */
     --zona-inf: 135px;
   }
 
   /* --- PRESET NEUTRO (marca nueva o cliente sin sistema) ---
   :root{
     --papel:#FAFAF8; --negro:#111418; --corte:#3D5A80; --acero:#C9CDD2;
-    --gris:#5A6068;
+    --grafito:#5A6068;
     --fuente-titulo:system-ui,sans-serif; --fuente-texto:system-ui,sans-serif;
     --fondo:var(--papel); --tinta:var(--negro);
     --ancho:1080px; --alto:1350px; --margen:88px; --zona-sup:0px; --zona-inf:0px;
   }
-  Es un punto de partida sobrio, no una identidad. Sustituye color y
-  tipografía en cuanto sepas de qué marca es la pieza.
+  Punto de partida sobrio, no una identidad. Sustituye color y tipografía
+  en cuanto sepas de qué marca es la pieza.
   --------------------------------------------------- */
 
   /* --- PRESET PODCAST (portada / story 1080x1920) ---
@@ -91,50 +88,56 @@
             calc(var(--margen) + var(--zona-inf));
   }
 
-  /* Foto: va debajo y llega al borde. La banda se le monta encima. */
+  /* FOTO + VELO. Regla 3: el texto sobre foto solo va sobre degradado de
+     contraste, nunca sobre la imagen limpia. La foto va DEBAJO y sangra
+     hasta el borde; el velo se le monta encima. */
   .foto{position:absolute;inset:0;z-index:0}
   .foto img{width:100%;height:100%;object-fit:cover}
-  .pieza--foto{--tinta:#FBFAF8}
-  .pieza--foto .foto::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(17,17,17,.9) 20%,rgba(17,17,17,.35) 60%,rgba(17,17,17,0) 100%)}
+  .velo{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to top,rgba(17,17,17,.94) 0%,rgba(17,17,17,.78) 28%,rgba(17,17,17,0) 55%)}
+  .velo--arriba{background:linear-gradient(to bottom,rgba(17,17,17,.94) 0%,rgba(17,17,17,.78) 28%,rgba(17,17,17,0) 55%)}
+  .pieza--foto{--tinta:#FBFAF8;--grafito:rgba(251,250,248,.78)}
 
-  /* El bloque de portada va CENTRADO. Anclado arriba deja hueco muerto. */
-  .capa{position:relative;z-index:1;display:flex;flex-direction:column;
-        height:100%;justify-content:center}
+  /* La portada se apoya ABAJO, anclada al borde inferior del área útil. */
+  .capa{position:relative;z-index:2;display:flex;flex-direction:column;
+        height:100%;justify-content:flex-end}
   .capa--arriba{justify-content:flex-start}
-  .capa--abajo{justify-content:flex-end}
 
-  /* Numerador: rojo, arriba a la izquierda. Public Sans Bold 22. */
+  /* Numerador: ACERO, grande y apagado. En v3 dejó de ir en rojo. 50pt = 67px */
   .numerador{position:absolute;top:calc(var(--margen) + var(--zona-sup));
-    left:var(--margen);z-index:2;font-size:22px;font-weight:700;
-    letter-spacing:.1em;color:var(--corte)}
+    left:var(--margen);z-index:3;
+    font-family:var(--fuente-titulo);font-weight:600;font-size:67px;
+    line-height:1;color:var(--acero)}
 
-  .titular{font-family:var(--fuente-titulo);font-weight:800;
-    font-size:54px;line-height:1.16;letter-spacing:-.02em;
-    text-wrap:balance;max-width:17ch}
+  /* Titular de portada de carrusel: 30pt = 40px · interlineado 1,16 */
+  .titular{font-family:var(--fuente-titulo);font-weight:600;
+    font-size:40px;line-height:1.16;text-wrap:balance;max-width:24ch}
 
-  .bajada{margin-top:28px;font-size:32px;line-height:1.45;
-    color:var(--gris);max-width:30ch;font-weight:400}
+  /* Bajada: Public Sans 400 · 18pt = 24px · 1,45 · grafito */
+  .bajada{margin-top:20px;font-size:24px;line-height:1.45;
+    color:var(--grafito);max-width:38ch;font-weight:400}
 
-  /* Cuerpo de página interna */
-  .interna .titular{font-size:40px;line-height:1.18}
-  .cuerpo{font-size:32px;line-height:1.5;margin-top:28px;max-width:30ch}
+  /* Página interna: titular 20pt = 27px · cuerpo 18pt = 24px · 1,5 */
+  .interna .titular{font-size:27px;line-height:1.18}
+  .cuerpo{font-size:24px;line-height:1.5;margin-top:20px;max-width:38ch}
   .cuerpo strong{font-weight:700}
 
-  /* Cierre: única página negra. El contraste avisa que terminó. */
-  .pieza--cierre{--fondo:var(--negro);--tinta:var(--papel);--gris:#B9BDC0}
-  .pieza--cierre .titular{font-size:46px;line-height:1.18}
-  .cta{font-size:34px;line-height:1.4;font-weight:700;margin-top:36px}
+  /* Cierre: única página negra, y no rota. Frase 24pt = 32px */
+  .pieza--cierre{--fondo:var(--negro);--tinta:var(--papel);--grafito:var(--acero)}
+  .pieza--cierre .titular{font-size:32px;line-height:1.18}
+  .cta{font-size:24px;line-height:1.4;font-weight:700;margin-top:28px}
 
-  /* REGLA 1: un solo elemento rojo por pieza. El numerador ya lo es, así que
-     el filete va en negro. Si quitas el numerador, puedes pintarlo de --corte. */
-  .filete{width:120px;height:6px;background:var(--negro);margin-bottom:32px}
+  /* Línea de acento: 5,3 × 0,24 cm = 200 × 9 px. SOLO en piezas de papel.
+     En portadas sobre foto NO va línea suelta: el rojo entra en el logotipo. */
+  .linea{width:200px;height:9px;background:var(--corte);margin-bottom:24px}
 
+  /* Logo de pie: 14pt = 19px, abajo a la derecha */
   .pie{position:absolute;bottom:calc(var(--margen) + var(--zona-inf));
-    right:var(--margen);z-index:2;
-    font-family:var(--fuente-titulo);font-weight:700;font-size:26px}
+    right:var(--margen);z-index:3;
+    font-family:var(--fuente-titulo);font-weight:600;font-size:19px}
 
-  /* Guías de zona segura. Pon class="pieza guias". QUÍTALAS antes de exportar. */
+  /* Guías de zona segura. class="pieza guias". QUÍTALAS antes de exportar:
+     publicar con la guía puesta está en la lista de qué no hacer. */
   .guias::before{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
     border:1px dashed rgba(195,53,43,.85);
     margin:calc(var(--margen) + var(--zona-sup)) var(--margen)
@@ -143,11 +146,13 @@
 </head>
 <body>
 
+<!-- PORTADA DE CARRUSEL, de papel. Con foto: añade .pieza--foto, el bloque
+     .foto y .velo, y quita la .linea (sobre foto no va línea suelta). -->
 <div class="pieza">
-  <!-- <div class="foto"><img src="foto.jpg" alt=""></div> -->
-  <span class="numerador">01 / 07</span>
+  <!-- <div class="foto"><img src="foto.jpg" alt=""></div><div class="velo"></div> -->
+  <span class="numerador">02</span>
   <div class="capa">
-    <div class="filete"></div>
+    <div class="linea"></div>
     <h1 class="titular">[TITULAR]</h1>
     <p class="bajada">[BAJADA]</p>
   </div>
