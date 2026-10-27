@@ -162,6 +162,16 @@
     text-overflow: ellipsis;
   }
 
+  /* Segundo Cero: la app, destacada arriba */
+  a.enlace.app { border-color: var(--corte); padding: 14px 18px 14px 14px; }
+  .app-lado { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .app-icono { width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0; display: block; }
+  .app .enlace-sub { white-space: normal; }
+  .nuevo {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--corte); margin-left: 6px; vertical-align: 2px;
+  }
+
   .flecha {
     font-size: 18px;
     flex-shrink: 0;
@@ -209,6 +219,22 @@
   <img class="logo-mark logo-dark" src="img/logo-dark.png" width="1200" height="135" alt="LUBIASO">
   <p class="bio">Le hablo a mujeres de 40 y pico sobre lo que nadie dice en voz alta.</p>
   <p class="ubicacion">Caracas, Venezuela</p>
+
+  <div class="grupo">
+    <p class="etiqueta">Mi app</p>
+    <div class="enlaces">
+      <a class="enlace app" data-goatcounter-click="enlace/segundo-cero" href="https://segundo-cero.vercel.app/pro/" target="_blank" rel="noopener">
+        <span class="app-lado">
+          <img class="app-icono" src="img/segundo-cero.png" width="192" height="192" alt="">
+          <span class="enlace-texto">
+            <span class="enlace-titulo">Segundo Cero<span class="nuevo">Nuevo</span></span>
+            <span class="enlace-sub">Qué publicar y cómo decirlo, con tu propia voz</span>
+          </span>
+        </span>
+        <span class="flecha" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
 
   <div class="grupo">
     <p class="etiqueta">Sígueme</p>
